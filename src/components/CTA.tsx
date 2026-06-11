@@ -13,12 +13,12 @@ export default function CTA() {
         <h1 className="text-white mix-blend-plus-darker text-3xl font-extrabold font-[roboto] w-[300px] text-center tracking-tighter mb-2">
           Ghana's Most Iconic Cake For Your Birthday
         </h1>
-        <Link
+        {/* <Link
           to={"/"}
           className="bg-[#3084A9] hover:bg-[#256d8a] text-white capitalize rounded-md py-2 px-4 w-fit my-0 mx-auto block"
         >
           Explore
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
