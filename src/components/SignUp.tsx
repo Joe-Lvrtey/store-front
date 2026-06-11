@@ -34,8 +34,8 @@ export default function SignUp({
 
       toggleLogs();
     } catch (error) {
-      setError("invalid credentials");
-      console.error(error);
+      setError("Something went wrong. Please try again.");
+      console.error("this is the current error : ", error);
     }
   };
 

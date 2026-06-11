@@ -29,21 +29,21 @@ export default function Cart() {
   const shipping = 0;
   const total = subtotal + shipping;
 
-  const goNextStep = () => {
+  const goToNextStep = () => {
     if (step < 3) setStep(step + 1);
   };
 
-  const goPrevStep = () => {
+  const goToPrevStep = () => {
     if (step > 1) setStep(step - 1);
   };
 
   return (
     <div className="w-[85%] mx-auto my-0">
- 
+
       <div className="my-10 flex items-center gap-2">
         {step > 1 && (
           <button
-            onClick={goPrevStep}
+            onClick={goToPrevStep}
             className="flex items-center gap-2 text-[#9B9B9B] hover:text-[#292D32] transition-colors"
           >
             <ArrowLeft className="text-[#292D32]" />
@@ -62,25 +62,23 @@ export default function Cart() {
           </h3>
         </header>
         <div className="flex justify-center items-center gap-6 md:gap-10">
-          {[1, 2, 3].map((s) => (
-            <div key={s} className="flex flex-col items-center gap-2">
+          {[1, 2, 3].map((currentStep) => (
+            <div key={currentStep} className="flex flex-col items-center gap-2">
               <span
-                className={`w-10 h-10 flex items-center justify-center rounded-full text-sm font-medium ${
-                  step === s ? "bg-black text-white" : "bg-[#B1B5C3] text-white"
-                }`}
+                className={`w-10 h-10 flex items-center justify-center rounded-full text-sm font-medium ${step === currentStep ? "bg-black text-white" : "bg-[#B1B5C3] text-white"
+                  }`}
               >
-                {s}
+                {currentStep}
               </span>
               <span
-                className={`text-sm ${
-                  step === s ? "text-black font-semibold" : "text-[#B1B5C3]"
-                }`}
+                className={`text-sm ${step === currentStep ? "text-black font-semibold" : "text-[#B1B5C3]"
+                  }`}
               >
-                {s === 1
+                {currentStep === 1
                   ? "Shopping Cart"
-                  : s === 2
-                  ? "Checkout Details"
-                  : "Order Complete"}
+                  : currentStep === 2
+                    ? "Checkout Details"
+                    : "Order Complete"}
               </span>
             </div>
           ))}
@@ -215,7 +213,7 @@ export default function Cart() {
             </div>
 
             <button
-              onClick={goNextStep}
+              onClick={goToNextStep}
               className="w-full bg-black text-white py-3 rounded-md font-medium hover:bg-[#333] transition"
             >
               Proceed to Checkout

@@ -7,8 +7,8 @@ export default function SubSellers() {
     <>
       <div className="flex flex-col lg:flex-row items-center my-4 gap-3">
         {subSellersData.map((data) => (
-          <div className="flex flex-col">
-            <div key={data.id}>
+          <div key={data.id} className="flex flex-col">
+            <div>
               <img src={data.image} alt="cake" className="rounded-md" />
             </div>
             <div>

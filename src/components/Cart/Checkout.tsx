@@ -223,11 +223,10 @@ function Checkout() {
                 <div className="my-4">
                   <PaystackButton
                     {...componentProps}
-                    className={`${
-                      !isFormValid()
-                        ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-amber-800 hover:bg-amber-700 shadow-md hover:shadow-lg"
-                    } text-white uppercase font-medium text-sm py-2 px-6 rounded transition-all duration-300 ease-in-out`}
+                    className={`${!isFormValid()
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-amber-800 hover:bg-amber-700 shadow-md hover:shadow-lg"
+                      } text-white uppercase font-medium text-sm py-2 px-6 rounded transition-all duration-300 ease-in-out`}
                   />
                   {!isFormValid() && (
                     <p className="text-red-500 text-sm mt-2">
@@ -239,7 +238,7 @@ function Checkout() {
               </div>
             ) : (
               <span className="text-center text-lg font-bold">
-                Nothing aadded to cart
+                Nothing added to cart
               </span>
             )}
           </div>

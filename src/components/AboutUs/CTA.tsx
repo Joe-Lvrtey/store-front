@@ -8,7 +8,7 @@ export default function HeroBanner() {
       className="relative h-[357px] md:h-[500px] w-full mb-10 bg-cover bg-center flex items-start"
       style={{ backgroundImage: `url(${cake11})` }}
     >
-  
+
       <div className="absolute top-4 left-4 flex flex-wrap items-center gap-2 text-sm md:text-base">
         <div className="flex items-center space-x-1">
           <Link to="/" className="text-[#8B96A5] font-normal hover:underline">

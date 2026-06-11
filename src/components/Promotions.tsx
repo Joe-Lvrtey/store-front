@@ -7,14 +7,14 @@ import { useState, useRef, useEffect } from "react";
 export default function Promotions() {
   // useRef hook ---> allows to store mutable values that does not cause re-render when updated
 
-  const interval = useRef<NodeJS.Timeout | undefined>();
+  const interval = useRef<any>();
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
   const startTimer = () => {
-    const timerDate = new Date("February 27 2025 00:00:00").getTime();
+    const timerDate = new Date("February 27 2027 00:00:00").getTime();
 
     interval.current = setInterval(() => {
       const now = new Date().getTime();
