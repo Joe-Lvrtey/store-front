@@ -14,7 +14,9 @@ import { auth } from "../firebase-config";
 export default function NavBar({ user }: { user: any }) {
   const dispatch = useDispatch();
   const isActive = useSelector((state: RootState) => state.log.isActive);
-  // const total = useSelector((state: RootState) => state.cart.total);
+  const cartCount = useSelector((state: RootState) =>
+    state.cart.cart.reduce((total, item) => total + item.quantity, 0)
+  );
 
   const [login, setLogin] = useState(false);
 
@@ -43,7 +45,14 @@ export default function NavBar({ user }: { user: any }) {
           <div className="flex items-center gap-2 md:gap-3">
             <div className="flex items-center gap-2 md:hidden">
               <Link to="/cart" className="flex items-center gap-1 rounded-sm bg-white/15 px-2 py-1 text-sm font-semibold text-white">
-                <CgShoppingCart className="text-base" />
+                <div className="relative">
+                  <CgShoppingCart className="text-base" />
+                  {cartCount > 0 && (
+                    <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-orange-500 px-1 text-[10px] font-bold text-white">
+                      {cartCount}
+                    </span>
+                  )}
+                </div>
                 cart
               </Link>
               <button
@@ -58,9 +67,11 @@ export default function NavBar({ user }: { user: any }) {
               <div className="flex gap-1 items-center">
                 <div className="relative">
                   <CgShoppingCart className="text-white" />
-                  {/* <span className="text-orange-500 text-xs font-bold absolute -top-2 right-1">
-                    {total}
-                  </span> */}
+                  {cartCount > 0 && (
+                    <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-orange-500 px-1 text-[10px] font-bold text-white">
+                      {cartCount}
+                    </span>
+                  )}
                 </div>
                 <Link to={"/cart"} className="capitalize text-white">
                   cart

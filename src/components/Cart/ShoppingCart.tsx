@@ -7,12 +7,16 @@ import {
 } from "../../store/cartSlice/cartSlice";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { ArrowLeft } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Checkout from "./Checkout";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase-config";
+import { setActive } from "../../store/logsSlice/logSlice";
 
 export default function Cart() {
   const cart = useSelector((state: RootState) => state.cart.cart);
   const [step, setStep] = useState(1);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   const dispatch = useDispatch();
 
@@ -29,8 +33,25 @@ export default function Cart() {
   const shipping = 0;
   const total = subtotal + shipping;
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsAuthenticated(Boolean(user));
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const goToNextStep = () => {
     if (step < 3) setStep(step + 1);
+  };
+
+  const handleProceedToCheckout = () => {
+    if (!isAuthenticated) {
+      dispatch(setActive());
+      return;
+    }
+
+    goToNextStep();
   };
 
   const goToPrevStep = () => {
@@ -213,11 +234,17 @@ export default function Cart() {
             </div>
 
             <button
-              onClick={goToNextStep}
-              className="w-full bg-black text-white py-3 rounded-md font-medium hover:bg-[#333] transition"
+              onClick={handleProceedToCheckout}
+              disabled={isAuthenticated === null}
+              className="w-full bg-black text-white py-3 rounded-md font-medium hover:bg-[#333] transition disabled:cursor-not-allowed disabled:bg-gray-400"
             >
-              Proceed to Checkout
+              {isAuthenticated === null ? "Checking account..." : "Proceed to Checkout"}
             </button>
+            {!isAuthenticated && isAuthenticated !== null && (
+              <p className="text-sm text-red-500">
+                Please sign in to continue to checkout.
+              </p>
+            )}
           </div>
         </div>
       )}

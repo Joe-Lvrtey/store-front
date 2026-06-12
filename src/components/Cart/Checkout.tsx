@@ -1,15 +1,19 @@
 import { RootState } from "../../store/store";
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { PAYSTACK_API } from "../../constants";
 import { PaystackButton } from "react-paystack";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase-config";
+import { setActive } from "../../store/logsSlice/logSlice";
 
 function Checkout() {
   const cart = useSelector((state: RootState) => state.cart.cart);
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [name, setName] = useState("");
   const [address, SetAddress] = useState("");
   const [zip, SetZip] = useState("");
@@ -20,6 +24,16 @@ function Checkout() {
   };
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsAuthenticated(Boolean(user));
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const totalPrice = cart.reduce(function (prev, next) {
     return prev + next.price;
   }, 0);
@@ -49,6 +63,25 @@ function Checkout() {
     className:
       "bg-amber-800 text-white uppercase font-medium text-sm py-2 px-6 rounded shadow-md transition-all duration-300 ease-in-out hover:bg-amber-700 hover: shadow-lg",
   };
+
+  if (isAuthenticated === false) {
+    return (
+      <div className="rounded-lg border border-gray-200 bg-white p-8 text-center shadow-sm">
+        <h2 className="mb-3 text-xl font-semibold text-gray-900">
+          Authentication required
+        </h2>
+        <p className="mb-5 text-sm text-gray-600">
+          Please sign in to continue with checkout.
+        </p>
+        <button
+          onClick={() => dispatch(setActive())}
+          className="rounded-md bg-[#3084A9] px-4 py-2 text-sm font-semibold text-white"
+        >
+          Login / Sign up
+        </button>
+      </div>
+    );
+  }
 
   return (
     <>

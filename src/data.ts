@@ -108,25 +108,25 @@ export const promotionData = [
 export const vendorsData = [
   {
     id: 11,
-    name: "BARBIE'S DREAM EATS",
+    name: "Barbie Dream Eats",
     image: vendor1,
     link: "/vendor/vendor1",
   },
   {
     id: 13,
-    name: "HERTY TASTY HOUSE",
+    name: "Hearty Tasty House",
     image: vendor3,
     link: "/vendor/vendor3",
   },
   {
     id: 14,
-    name: "JOE'S TOP PICKS",
+    name: "Joe's Top Picks",
     image: vendor4,
     link: "/vendor/vendor4",
   },
   {
     id: 15,
-    name: "HOT 100",
+    name: "Hot 100",
     image: vendor5,
     link: "/vendor/vendor5",
   },
@@ -141,10 +141,8 @@ export const ourVendors = {
       description: "Strawberry Swirl Mille Crepe Cake",
       price: 600,
       about:
-      "A rich and satisfying chocolate fudge cake made for true dessert lovers. Moist layers, deep cocoa flavor, and a smooth finish make this a crowd favorite for family gatherings and celebrations.",
-    sub:
-    "Barbie Dream Eats House is known for comforting, homemade-style desserts prepared with care and generous portions.",
-  
+        "A rich and satisfying chocolate fudge cake made for true dessert lovers. Moist layers, deep cocoa flavor, and a smooth finish make this a crowd favorite for family gatherings and celebrations.",
+      sub: "Barbie Dream Eats House is known for comforting, homemade-style desserts prepared with care and generous portions.",
     },
   ],
   vendor2: [
@@ -154,10 +152,9 @@ export const ourVendors = {
       name: "Hearty Tasty House",
       description: "Classic Chocolate Fudge Cake",
       price: 450,
-       about:
-      "This cake is seriously GIANT! The skyscraping 20-layer Chocolate Peanut Butter Cake features alternating layers of rich cake and smooth peanut butter mascarpone. Crafted with premium ingredients, it’s perfect for luxury celebrations and unforgettable moments.",
-    sub:
-      " Hearty Tasty specializes in premium desserts made for birthdays, weddings, and special occasions, delivering elegance in every bite.",
+      about:
+        "This cake is seriously GIANT! The skyscraping 20-layer Chocolate Peanut Butter Cake features alternating layers of rich cake and smooth peanut butter mascarpone. Crafted with premium ingredients, it’s perfect for luxury celebrations and unforgettable moments.",
+      sub: " Hearty Tasty specializes in premium desserts made for birthdays, weddings, and special occasions, delivering elegance in every bite.",
     },
   ],
   vendor3: [
@@ -167,26 +164,33 @@ export const ourVendors = {
       name: "Joe's Pick",
       description: "Vanilla Buttercream Celebration Cake",
       price: 380,
-       about:
-      "Light, fluffy vanilla sponge layered with smooth buttercream frosting. This cake delivers a timeless taste that never goes out of style, perfect for any celebration.",
-    sub:
-      "Joe's Pick focuses on simple, well-loved flavors made fresh and delivered with consistency you can trust.",
-  
+      about:
+        "Light, fluffy vanilla sponge layered with smooth buttercream frosting. This cake delivers a timeless taste that never goes out of style, perfect for any celebration.",
+      sub: "Joe's Pick focuses on simple, well-loved flavors made fresh and delivered with consistency you can trust.",
     },
   ],
   vendor4: [
     {
       id: 444,
       image: vend4,
+      name: "Joe's Top Picks",
+      description: "Red Velvet Supreme Cake",
+      price: 520,
+      about:
+        "Bold, rich, and indulgent red velvet cake layered with creamy frosting. Designed for those who love standout flavors and premium presentation.",
+      sub: "Joe's Top Picks focuses on simple, well-loved flavors made fresh and delivered with consistency you can trust.",
+    },
+  ],
+  vendor5: [
+    {
+      id: 555,
+      image: vendor5,
       name: "Hot 100",
       description: "Red Velvet Supreme Cake",
       price: 520,
       about:
-      "Bold, rich, and indulgent red velvet cake layered with creamy frosting. Designed for those who love standout flavors and premium presentation.",
-    sub:
-      "Hot 100 delivers trendy, high-demand desserts inspired by what customers love most, combining flavor with style.", 
+        "Bold, rich, and indulgent red velvet cake layered with creamy frosting. Designed for those who love standout flavors and premium presentation.",
+      sub: "Hot 100 delivers trendy, high-demand desserts inspired by what customers love most, combining flavor with style.",
     },
   ],
 } as const;
-
-
