@@ -5,6 +5,7 @@ import { setActive } from "../store/logsSlice/logSlice";
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase-config";
+import { getAuthErrorMessage } from "../lib/authErrorMessages";
 
 export default function Login({
   setLogin,
@@ -17,14 +18,18 @@ export default function Login({
 
   const login = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    try {
-      const user = await signInWithEmailAndPassword(auth, email, password);
-      console.log(user);
 
+    if (!email.trim() || !password.trim()) {
+      setError("Please enter both your email and password.");
+      return;
+    }
+
+    try {
+      await signInWithEmailAndPassword(auth, email.trim(), password);
+      setError("");
       closeLogin();
     } catch (error) {
-      setError("invalid credentials");
-      console.log(error);
+      setError(getAuthErrorMessage(error));
     }
   };
 
@@ -41,7 +46,6 @@ export default function Login({
 
   const closeLogin = () => {
     setLogin(false);
-    console.log("console logged");
   };
 
   return (
@@ -65,6 +69,7 @@ export default function Login({
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
+              if (error) setError("");
             }}
             type="text"
             className="rounded-md outline-none border-gray-300 border-[1.5px] w-full py-2 px-3 mb-4"
@@ -74,6 +79,7 @@ export default function Login({
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
+              if (error) setError("");
             }}
             type="password"
             className="rounded-md outline-none border-gray-300 border-[1.5px] w-full py-2 px-3 mb-4"

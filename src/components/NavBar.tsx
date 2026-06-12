@@ -28,7 +28,7 @@ export default function NavBar({ user }: { user: any }) {
 
   return (
     <div>
-      <div className="bg-[#3084A9] relative">
+      <div className="bg-[#3084A9] relative z-50">
         <nav className="flex justify-between items-center w-[90%] my-0 mx-auto py-4">
           <div className="">
             <Link to={"/"}>
@@ -40,40 +40,56 @@ export default function NavBar({ user }: { user: any }) {
               cakes and more
             </h1>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="flex gap-1 items-center">
-              <div className="relative">
-                <CgShoppingCart className="text-white" />
-                {/* <span className="text-orange-500 text-xs font-bold absolute -top-2 right-1">
-                  {total}
-                </span> */}
-              </div>
-              <Link to={"/cart"} className="capitalize text-white">
+          <div className="flex items-center gap-2 md:gap-3">
+            <div className="flex items-center gap-2 md:hidden">
+              <Link to="/cart" className="flex items-center gap-1 rounded-sm bg-white/15 px-2 py-1 text-sm font-semibold text-white">
+                <CgShoppingCart className="text-base" />
                 cart
               </Link>
-            </div>
-            {user ? (
-              <div className="flex items-center gap-x-3">
-                <p className="text-white font-serif text-sm md:text-lg font-bold ml-2">
-                  Welcome, {user.displayName || "User"}
-                </p>
-                <button
-                  onClick={logout}
-                  className="border-none rounded-sm bg-white text-[#3084A9] py-0.5 px-1.5 md:py-1 md:px-4 capitalize"
-                >
-                  logout
-                </button>
-              </div>
-            ) : (
               <button
                 onClick={showLogs}
-                className="border-none rounded-sm bg-white text-[#3084A9] py-1 px-3 capitalize"
+                className="rounded-sm bg-white px-2.5 py-1 text-sm font-semibold text-[#3084A9]"
               >
                 login/signup
               </button>
-            )}
+            </div>
+
+            <div className="hidden md:flex items-center gap-3">
+              <div className="flex gap-1 items-center">
+                <div className="relative">
+                  <CgShoppingCart className="text-white" />
+                  {/* <span className="text-orange-500 text-xs font-bold absolute -top-2 right-1">
+                    {total}
+                  </span> */}
+                </div>
+                <Link to={"/cart"} className="capitalize text-white">
+                  cart
+                </Link>
+              </div>
+              {user ? (
+                <div className="flex items-center gap-x-3">
+                  <p className="text-white font-serif text-sm md:text-lg font-bold ml-2">
+                    Welcome, {user.displayName || "User"}
+                  </p>
+                  <button
+                    onClick={logout}
+                    className="border-none rounded-sm bg-white text-[#3084A9] py-0.5 px-1.5 md:py-1 md:px-4 capitalize"
+                  >
+                    logout
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={showLogs}
+                  className="border-none rounded-sm bg-white text-[#3084A9] py-1 px-3 capitalize"
+                >
+                  login/signup
+                </button>
+              )}
+            </div>
           </div>
         </nav>
+
         {isActive && <SignUp setLogin={setLogin} />}
         {login && <Login setLogin={setLogin} />}
       </div>

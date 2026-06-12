@@ -17,10 +17,6 @@ interface ButtonProps {
 }
 
 export default function Button({ className, product }: ButtonProps) {
-  if (!product || !product.id) {
-    // console.log('no product found');
-  }
-  // console.log('product', product);
 
   const cart = useSelector((state: RootState) => state.cart.cart);
   const total = useSelector((state: RootState) => state.cart.total);

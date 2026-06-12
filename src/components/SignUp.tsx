@@ -6,6 +6,7 @@ import { toggleBack } from "../store/logsSlice/logSlice";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase-config";
 import { updateProfile } from "firebase/auth";
+import { getAuthErrorMessage } from "../lib/authErrorMessages";
 
 export default function SignUp({
   setLogin,
@@ -20,22 +21,27 @@ export default function SignUp({
   const register = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!firstName.trim() || !email.trim() || !password.trim()) {
+      setError("Please fill in your name, email, and password.");
+      return;
+    }
+
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
-        email,
+        email.trim(),
         password
       );
       const user = userCredential.user;
 
       await updateProfile(user, {
-        displayName: firstName,
+        displayName: firstName.trim(),
       });
 
+      setError("");
       toggleLogs();
     } catch (error) {
-      setError("Something went wrong. Please try again.");
-      console.error("this is the current error : ", error);
+      setError(getAuthErrorMessage(error));
     }
   };
 
@@ -71,6 +77,7 @@ export default function SignUp({
             value={firstName}
             onChange={(e) => {
               setFirstName(e.target.value);
+              if (error) setError("");
             }}
             type="text"
             className="rounded-md outline-none border-gray-300 border-[1.5px] w-full py-2 px-3 mb-4"
@@ -80,6 +87,7 @@ export default function SignUp({
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
+              if (error) setError("");
             }}
             type="email"
             className="rounded-md outline-none border-gray-300 border-[1.5px] w-full py-2 px-3 mb-4"
@@ -89,6 +97,7 @@ export default function SignUp({
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
+              if (error) setError("");
             }}
             type="password"
             className="rounded-md outline-none border-gray-300 border-[1.5px] w-full py-2 px-3 mb-4"
